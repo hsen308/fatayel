@@ -1,0 +1,1089 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fatayel — Bshara El Khoury, Beirut</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --green-deep: #0a2e23;
+        --green-black: #071f17;
+        --white: #fdfcf8;
+        --coral: #ff6b54;
+        --sage: #a8c4a0;
+        --line: rgba(253, 252, 248, 0.14);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--green-deep);
+        color: var(--white);
+        font-family: "Space Grotesk", sans-serif;
+        overflow-x: hidden;
+      }
+      ::selection {
+        background: var(--coral);
+        color: var(--green-black);
+      }
+
+      h1,
+      h2,
+      h3,
+      .display {
+        font-family: "Anton", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+        line-height: 0.92;
+      }
+      .mono {
+        font-family: "Space Mono", monospace;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      /* ---- Checkerboard motif ---- */
+      .checker {
+        height: 34px;
+        background-image:
+          linear-gradient(
+            45deg,
+            var(--white) 25%,
+            transparent 25%,
+            transparent 75%,
+            var(--white) 75%
+          ),
+          linear-gradient(
+            45deg,
+            var(--white) 25%,
+            transparent 25%,
+            transparent 75%,
+            var(--white) 75%
+          );
+        background-size: 34px 34px;
+        background-position:
+          0 0,
+          17px 17px;
+        background-color: var(--green-black);
+      }
+      .checker.flip {
+        background-color: var(--coral);
+      }
+
+      /* ---- Nav ---- */
+      nav {
+        position: fixed;
+        top: 34px;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 6vw;
+        background: rgba(10, 46, 35, 0.82);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--line);
+        transition: top 0.3s ease;
+      }
+      nav .logo {
+        font-family: "Anton", sans-serif;
+        font-size: 22px;
+        letter-spacing: 0.04em;
+      }
+      nav ul {
+        display: flex;
+        gap: 28px;
+        list-style: none;
+      }
+      nav a {
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 500;
+        opacity: 0.85;
+        transition:
+          opacity 0.2s,
+          color 0.2s;
+        position: relative;
+      }
+      nav a:hover {
+        opacity: 1;
+        color: var(--coral);
+      }
+      nav .call-btn {
+        background: var(--coral);
+        color: var(--green-black);
+        padding: 9px 18px;
+        border-radius: 2px;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+      }
+      .nav-links,
+      .nav-cta {
+        display: flex;
+        align-items: center;
+      }
+      .burger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+      }
+      .burger span {
+        width: 24px;
+        height: 2px;
+        background: var(--white);
+        display: block;
+      }
+
+      @media (max-width: 780px) {
+        nav ul {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100vh;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          background: var(--green-black);
+          gap: 36px;
+          transform: translateY(-110%);
+          transition: transform 0.4s ease;
+        }
+        nav ul.open {
+          transform: translateY(0);
+        }
+        nav ul a {
+          font-size: 22px;
+        }
+        .burger {
+          display: flex;
+          z-index: 60;
+        }
+        .nav-cta {
+          display: none;
+        }
+      }
+
+      /* ---- Hero ---- */
+      .hero {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 140px 6vw 80px;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse 60% 50% at 80% 20%,
+            rgba(255, 107, 84, 0.16),
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse 50% 40% at 10% 90%,
+            rgba(168, 196, 160, 0.12),
+            transparent 60%
+          );
+        pointer-events: none;
+      }
+      .hero-eyebrow {
+        font-family: "Space Mono", monospace;
+        color: var(--sage);
+        font-size: 13px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        margin-bottom: 18px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .hero-eyebrow .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--coral);
+        box-shadow: 0 0 0 0 rgba(255, 107, 84, 0.5);
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(255, 107, 84, 0.5);
+        }
+        70% {
+          box-shadow: 0 0 0 8px rgba(255, 107, 84, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(255, 107, 84, 0);
+        }
+      }
+      .hero-title {
+        font-size: clamp(58px, 13vw, 168px);
+        color: var(--white);
+        position: relative;
+        z-index: 2;
+      }
+      .hero-title .stroke {
+        color: transparent;
+        -webkit-text-stroke: 2px var(--white);
+      }
+      .hero-sub {
+        max-width: 480px;
+        font-size: 18px;
+        line-height: 1.5;
+        color: rgba(253, 252, 248, 0.8);
+        margin-top: 28px;
+        font-weight: 400;
+      }
+      .hero-actions {
+        display: flex;
+        gap: 16px;
+        margin-top: 40px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        padding: 16px 30px;
+        font-family: "Space Grotesk", sans-serif;
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        border-radius: 2px;
+        border: 2px solid transparent;
+        cursor: pointer;
+        transition:
+          transform 0.2s ease,
+          background 0.2s ease,
+          color 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .btn-solid {
+        background: var(--coral);
+        color: var(--green-black);
+      }
+      .btn-solid:hover {
+        transform: translateY(-2px);
+        background: #ff7e69;
+      }
+      .btn-outline {
+        border-color: var(--white);
+        color: var(--white);
+      }
+      .btn-outline:hover {
+        transform: translateY(-2px);
+        background: var(--white);
+        color: var(--green-black);
+      }
+
+      .hero-meta {
+        position: absolute;
+        bottom: 48px;
+        right: 6vw;
+        text-align: right;
+        font-family: "Space Mono", monospace;
+        font-size: 13px;
+        color: var(--sage);
+        line-height: 1.8;
+        z-index: 2;
+      }
+      @media (max-width: 780px) {
+        .hero-meta {
+          position: static;
+          margin-top: 48px;
+          text-align: left;
+        }
+      }
+
+      /* ---- Marquee strip ---- */
+      .marquee-wrap {
+        background: var(--coral);
+        color: var(--green-black);
+        overflow: hidden;
+        white-space: nowrap;
+        padding: 14px 0;
+        border-top: 1px solid var(--green-black);
+        border-bottom: 1px solid var(--green-black);
+      }
+      .marquee {
+        display: inline-flex;
+        animation: scroll 28s linear infinite;
+      }
+      .marquee span {
+        font-family: "Anton", sans-serif;
+        font-size: 20px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        padding: 0 28px;
+        display: inline-flex;
+        align-items: center;
+        gap: 28px;
+      }
+      @keyframes scroll {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* ---- Section shell ---- */
+      section {
+        padding: 120px 6vw;
+        position: relative;
+      }
+      .section-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        gap: 24px;
+        margin-bottom: 64px;
+      }
+      .section-eyebrow {
+        font-family: "Space Mono", monospace;
+        color: var(--coral);
+        font-size: 13px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        margin-bottom: 14px;
+      }
+      .section-title {
+        font-size: clamp(38px, 6vw, 68px);
+        color: var(--white);
+      }
+      .section-note {
+        max-width: 340px;
+        font-size: 15px;
+        color: rgba(253, 252, 248, 0.65);
+        line-height: 1.6;
+      }
+
+      /* ---- About ---- */
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 60px;
+        align-items: start;
+      }
+      .about-grid p {
+        font-size: 19px;
+        line-height: 1.7;
+        color: rgba(253, 252, 248, 0.85);
+        margin-bottom: 20px;
+      }
+      .about-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1px;
+        background: var(--line);
+        border: 1px solid var(--line);
+      }
+      .stat {
+        background: var(--green-deep);
+        padding: 32px 24px;
+      }
+      .stat .num {
+        font-family: "Anton", sans-serif;
+        font-size: 44px;
+        color: var(--coral);
+        line-height: 1;
+      }
+      .stat .label {
+        font-family: "Space Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--sage);
+        margin-top: 10px;
+      }
+      @media (max-width: 900px) {
+        .about-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ---- Menu ---- */
+      .menu-section {
+        background: var(--green-black);
+      }
+      .menu-tabs {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 48px;
+      }
+      .menu-tab {
+        font-family: "Space Mono", monospace;
+        font-size: 13px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        padding: 10px 18px;
+        border: 1px solid var(--line);
+        border-radius: 2px;
+        cursor: pointer;
+        background: transparent;
+        color: var(--white);
+        opacity: 0.6;
+        transition: all 0.2s ease;
+      }
+      .menu-tab.active {
+        background: var(--coral);
+        color: var(--green-black);
+        border-color: var(--coral);
+        opacity: 1;
+      }
+      .menu-tab:hover {
+        opacity: 1;
+      }
+
+      .menu-category {
+        display: none;
+      }
+      .menu-category.active {
+        display: block;
+        animation: fadeIn 0.4s ease;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .menu-cat-label {
+        display: inline-block;
+        background: var(--coral);
+        color: var(--green-black);
+        font-family: "Anton", sans-serif;
+        font-size: 15px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        padding: 8px 18px;
+        margin-bottom: 28px;
+      }
+
+      .menu-list {
+        list-style: none;
+      }
+      .menu-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding: 22px 0;
+        border-bottom: 1px solid var(--line);
+        gap: 24px;
+      }
+      .menu-item:first-child {
+        border-top: 1px solid var(--line);
+      }
+      .menu-item-name {
+        font-size: clamp(20px, 3vw, 28px);
+        font-weight: 500;
+        flex: 1;
+      }
+      .menu-item-sizes {
+        font-family: "Space Mono", monospace;
+        font-size: 13px;
+        color: var(--sage);
+        white-space: nowrap;
+      }
+      .menu-item-price {
+        font-family: "Space Mono", monospace;
+        font-size: 20px;
+        color: var(--coral);
+        white-space: nowrap;
+      }
+
+      /* ---- Gallery ---- */
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+      }
+      .gallery-grid img {
+        width: 100%;
+        height: 280px;
+        object-fit: cover;
+        filter: grayscale(15%) contrast(1.05) saturate(1.1);
+        transition:
+          filter 0.3s ease,
+          transform 0.3s ease;
+      }
+      .gallery-grid div {
+        overflow: hidden;
+        border-radius: 2px;
+      }
+      .gallery-grid div:hover img {
+        filter: grayscale(0%) saturate(1.3);
+        transform: scale(1.05);
+      }
+      .gallery-grid div:nth-child(1) {
+        grid-row: span 2;
+      }
+      .gallery-grid div:nth-child(1) img {
+        height: 100%;
+        min-height: 580px;
+      }
+      @media (max-width: 900px) {
+        .gallery-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .gallery-grid div:nth-child(1) {
+          grid-row: span 1;
+        }
+        .gallery-grid div:nth-child(1) img {
+          min-height: 280px;
+        }
+      }
+
+      /* ---- Hours / location ---- */
+      .visit-section {
+        background: var(--white);
+        color: var(--green-black);
+      }
+      .visit-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+      }
+      .visit-section .section-title {
+        color: var(--green-black);
+      }
+      .hours-table {
+        width: 100%;
+        margin-top: 24px;
+      }
+      .hours-table tr {
+        border-bottom: 1px solid rgba(10, 10, 10, 0.12);
+      }
+      .hours-table td {
+        padding: 16px 0;
+        font-size: 17px;
+      }
+      .hours-table td:first-child {
+        font-family: "Space Mono", monospace;
+        text-transform: uppercase;
+        font-size: 13px;
+        letter-spacing: 0.06em;
+        color: var(--coral);
+        width: 140px;
+      }
+      .hours-table tr.closed td:last-child {
+        color: rgba(10, 10, 10, 0.4);
+        text-decoration: line-through;
+      }
+      .addr-block {
+        font-size: 22px;
+        line-height: 1.5;
+        margin-top: 24px;
+        font-weight: 500;
+      }
+      .addr-block .mono {
+        display: block;
+        font-size: 15px;
+        color: rgba(10, 10, 10, 0.55);
+        margin-top: 14px;
+      }
+      .map-frame {
+        width: 100%;
+        height: 100%;
+        min-height: 340px;
+        border: none;
+        border-radius: 2px;
+        filter: grayscale(20%) contrast(1.05);
+      }
+      @media (max-width: 900px) {
+        .visit-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ---- Footer ---- */
+      footer {
+        background: var(--green-black);
+        padding: 64px 6vw 32px;
+        text-align: center;
+      }
+      footer .logo-big {
+        font-family: "Anton", sans-serif;
+        font-size: clamp(48px, 12vw, 140px);
+        color: var(--white);
+        -webkit-text-stroke: 1px rgba(253, 252, 248, 0.2);
+      }
+      footer .foot-links {
+        display: flex;
+        justify-content: center;
+        gap: 32px;
+        margin: 32px 0;
+        flex-wrap: wrap;
+      }
+      footer .foot-links a {
+        font-family: "Space Mono", monospace;
+        font-size: 13px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--sage);
+      }
+      footer .foot-links a:hover {
+        color: var(--coral);
+      }
+      footer .credit {
+        font-family: "Space Mono", monospace;
+        font-size: 12px;
+        color: rgba(253, 252, 248, 0.35);
+        margin-top: 24px;
+      }
+      footer .credit a {
+        color: var(--coral);
+      }
+
+      /* sticky order bar mobile */
+      .sticky-cta {
+        display: none;
+      }
+      @media (max-width: 780px) {
+        .sticky-cta {
+          display: flex;
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          z-index: 60;
+          background: var(--coral);
+          padding: 16px 6vw;
+          justify-content: center;
+          align-items: center;
+          gap: 10px;
+          font-family: "Space Grotesk", sans-serif;
+          font-weight: 700;
+          color: var(--green-black);
+          text-transform: uppercase;
+          letter-spacing: 0.04em;
+          font-size: 14px;
+        }
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+      .reveal.in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation-duration: 0.001ms !important;
+          transition-duration: 0.001ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="checker"></div>
+
+    <nav id="navbar">
+      <div class="logo">FATAYEL</div>
+      <div
+        class="burger"
+        id="burger"
+        aria-label="Open menu"
+        role="button"
+        tabindex="0"
+      >
+        <span></span><span></span><span></span>
+      </div>
+      <ul id="navlinks">
+        <li><a href="#about" class="nav-close">About</a></li>
+        <li><a href="#menu" class="nav-close">Menu</a></li>
+        <li><a href="#gallery" class="nav-close">Gallery</a></li>
+        <li><a href="#visit" class="nav-close">Visit</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="tel:0380705 0" class="call-btn">Call to Order</a>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="hero-eyebrow">
+        <span class="dot"></span> Bshara El Khoury, Beirut — Open Daily 12–12
+      </div>
+      <h1 class="hero-title">FAST<br /><span class="stroke">FATAYEL.</span></h1>
+      <p class="hero-sub">
+        Fatayel, makanek, nekhaat and shawarma made fresh on Bshara El Khoury —
+        the kind of corner spot you stop at on the way home and end up ordering
+        for the whole car.
+      </p>
+      <div class="hero-actions">
+        <a href="#menu" class="btn btn-solid">See the Menu →</a>
+        <a href="tel:0380705 0" class="btn btn-outline">03 80 70 50</a>
+      </div>
+      <div class="hero-meta">
+        OPEN 12:00 — 00:00<br />
+        CLOSED MONDAYS<br />
+        BSHARA EL KHOURY ST.
+      </div>
+    </section>
+
+    <div class="marquee-wrap">
+      <div class="marquee">
+        <span
+          >★ SHAWARMA DJEJ <span class="mono">4$</span> ★ MAKANEK
+          <span class="mono">5.5$</span> ★ BURGER MFATWAL
+          <span class="mono">7.5$</span> ★ SHAWARMA BOX
+          <span class="mono">15$</span></span
+        >
+        <span
+          >★ SHAWARMA DJEJ <span class="mono">4$</span> ★ MAKANEK
+          <span class="mono">5.5$</span> ★ BURGER MFATWAL
+          <span class="mono">7.5$</span> ★ SHAWARMA BOX
+          <span class="mono">15$</span></span
+        >
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-head reveal">
+        <div>
+          <div class="section-eyebrow">// The Spot</div>
+          <h2 class="section-title">Made on<br />the corner.</h2>
+        </div>
+        <p class="section-note">
+          No frills, no waiting around — just fatayel and shawarma done right,
+          every day of the week except Monday.
+        </p>
+      </div>
+      <div class="about-grid reveal">
+        <div>
+          <p>
+            Fatayel opened on Bshara El Khoury with one job: feed the street
+            fast, feed it well. The dough's rolled fresh, the makanek's grilled
+            to order, and the shawarma spins all day long.
+          </p>
+          <p>
+            It's a stand-up, grab-and-go kind of place — order at the counter,
+            watch it get made, and you're back on the street in minutes.
+            Lebanon's favorite street food, done properly.
+          </p>
+        </div>
+        <div class="about-stats">
+          <div class="stat">
+            <div class="num">12H</div>
+            <div class="label">Open Daily</div>
+          </div>
+          <div class="stat">
+            <div class="num">6/7</div>
+            <div class="label">Days a Week</div>
+          </div>
+          <div class="stat">
+            <div class="num">4$</div>
+            <div class="label">Fatayel From</div>
+          </div>
+          <div class="stat">
+            <div class="num">15$</div>
+            <div class="label">Shawarma Box</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MENU -->
+    <section id="menu" class="menu-section">
+      <div class="section-head reveal">
+        <div>
+          <div class="section-eyebrow">// The Menu</div>
+          <h2 class="section-title">What's<br />cooking.</h2>
+        </div>
+        <p class="section-note">
+          Prices in USD. Everything made fresh to order, every single day we're
+          open.
+        </p>
+      </div>
+
+      <div class="menu-tabs reveal">
+        <button class="menu-tab active" data-target="cat-sandwiches">
+          Sandwiches
+        </button>
+        <button class="menu-tab" data-target="cat-shawarma">Shawarma</button>
+        <button class="menu-tab" data-target="cat-plate">Plates</button>
+        <button class="menu-tab" data-target="cat-drinks">Cold Drinks</button>
+      </div>
+
+      <div class="reveal">
+        <div class="menu-category active" id="cat-sandwiches">
+          <span class="menu-cat-label">Sandwiches</span>
+          <ul class="menu-list">
+            <li class="menu-item">
+              <span class="menu-item-name">Fatayel</span
+              ><span class="menu-item-price">4$</span>
+            </li>
+            <li class="menu-item">
+              <span class="menu-item-name">Makanek</span
+              ><span class="menu-item-price">5.5$</span>
+            </li>
+            <li class="menu-item">
+              <span class="menu-item-name">Nekhaat</span
+              ><span class="menu-item-price">5$</span>
+            </li>
+            <li class="menu-item">
+              <span class="menu-item-name">Burger Mfatwal</span
+              ><span class="menu-item-price">7.5$</span>
+            </li>
+            <li class="menu-item">
+              <span class="menu-item-name">Fries</span
+              ><span class="menu-item-price">2.5$</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="menu-category" id="cat-shawarma">
+          <span class="menu-cat-label">Shawarma</span>
+          <ul class="menu-list">
+            <li class="menu-item">
+              <span class="menu-item-name">Shawarma Djej</span>
+              <span class="menu-item-sizes"
+                >small 4$ &nbsp;/&nbsp; large 5$</span
+              >
+            </li>
+            <li class="menu-item">
+              <span class="menu-item-name">Shawarma Lahme</span>
+              <span class="menu-item-sizes"
+                >small 5$ &nbsp;/&nbsp; large 6$</span
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="menu-category" id="cat-plate">
+          <span class="menu-cat-label">Plates</span>
+          <ul class="menu-list">
+            <li class="menu-item">
+              <span class="menu-item-name">Shawarma Box</span
+              ><span class="menu-item-price">15$</span>
+            </li>
+            <li class="menu-item">
+              <span class="menu-item-name">Shawarma Dejej</span
+              ><span class="menu-item-price">10$</span>
+            </li>
+            <li class="menu-item">
+              <span class="menu-item-name">Shawarma Lahme</span
+              ><span class="menu-item-price">12$</span>
+            </li>
+            <li class="menu-item">
+              <span class="menu-item-name">Shawarma Mix</span
+              ><span class="menu-item-price">11$</span>
+            </li>
+            <li class="menu-item">
+              <span class="menu-item-name">Fries</span
+              ><span class="menu-item-price">2$</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="menu-category" id="cat-drinks">
+          <span class="menu-cat-label">Cold Drinks</span>
+          <ul class="menu-list">
+            <li class="menu-item">
+              <span class="menu-item-name">Soft Drink</span
+              ><span class="menu-item-price">1$</span>
+            </li>
+            <li class="menu-item">
+              <span class="menu-item-name">Water</span
+              ><span class="menu-item-price">0.5$</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="checker flip"></div>
+
+    <!-- GALLERY -->
+    <section id="gallery">
+      <div class="section-head reveal">
+        <div>
+          <div class="section-eyebrow">// In The Kitchen</div>
+          <h2 class="section-title">Fresh,<br />always.</h2>
+        </div>
+        <p class="section-note">
+          Demo gallery — swap in real shots of the counter, the grill, and the
+          food once you're ready to launch.
+        </p>
+      </div>
+      <div class="gallery-grid reveal">
+        <div>
+          <img
+            src="https://images.unsplash.com/photo-1601050690597-df0568f70950?q=80&w=800&auto=format&fit=crop"
+            alt="Fresh fatayel pastries"
+          />
+        </div>
+        <div>
+          <img
+            src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?q=80&w=800&auto=format&fit=crop"
+            alt="Shawarma grill"
+          />
+        </div>
+        <div>
+          <img
+            src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?q=80&w=800&auto=format&fit=crop"
+            alt="Street food counter"
+          />
+        </div>
+        <div>
+          <img
+            src="https://images.unsplash.com/photo-1561758033-7e924f619b47?q=80&w=800&auto=format&fit=crop"
+            alt="Pita bread and wraps"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- VISIT -->
+    <section id="visit" class="visit-section">
+      <div class="section-head reveal">
+        <div>
+          <div class="section-eyebrow">// Find Us</div>
+          <h2 class="section-title">Come<br />hungry.</h2>
+        </div>
+      </div>
+      <div class="visit-grid reveal">
+        <div>
+          <div class="addr-block">
+            Bshara El Khoury St.<br />Beirut, Lebanon
+            <span class="mono">03 — 80 70 50</span>
+          </div>
+          <table class="hours-table">
+            <tr>
+              <td>Tue – Sun</td>
+              <td>12:00 PM — 12:00 AM</td>
+            </tr>
+            <tr class="closed">
+              <td>Monday</td>
+              <td>Closed</td>
+            </tr>
+          </table>
+          <a
+            href="tel:0380705 0"
+            class="btn btn-outline"
+            style="
+              margin-top: 32px;
+              border-color: var(--green-black);
+              color: var(--green-black);
+            "
+            >Call 03 80 70 50</a
+          >
+        </div>
+        <iframe
+          class="map-frame"
+          loading="lazy"
+          src="https://www.google.com/maps?q=Bshara+El+Khoury,+Beirut,+Lebanon&output=embed"
+        ></iframe>
+      </div>
+    </section>
+
+    <footer>
+      <div class="logo-big">FATAYEL</div>
+      <div class="foot-links">
+        <a href="#about">About</a>
+        <a href="#menu">Menu</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#visit">Visit</a>
+        <a href="tel:0380705 0">03 80 70 50</a>
+      </div>
+      <div class="credit">
+        Demo site built by <a href="#">Novustudios</a> — Bshara El Khoury,
+        Beirut
+      </div>
+    </footer>
+
+    <div class="sticky-cta">
+      <a href="tel:0380705 0" style="color: inherit"
+        >📞 Call to Order — 03 80 70 50</a
+      >
+    </div>
+
+    <script>
+      // mobile nav
+      const burger = document.getElementById("burger");
+      const navlinks = document.getElementById("navlinks");
+      burger.addEventListener("click", () => navlinks.classList.toggle("open"));
+      document
+        .querySelectorAll(".nav-close")
+        .forEach((a) =>
+          a.addEventListener("click", () => navlinks.classList.remove("open")),
+        );
+
+      // menu tabs
+      const tabs = document.querySelectorAll(".menu-tab");
+      const cats = document.querySelectorAll(".menu-category");
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          tabs.forEach((t) => t.classList.remove("active"));
+          cats.forEach((c) => c.classList.remove("active"));
+          tab.classList.add("active");
+          document.getElementById(tab.dataset.target).classList.add("active");
+        });
+      });
+
+      // scroll reveal
+      const revealEls = document.querySelectorAll(".reveal");
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add("in");
+          });
+        },
+        { threshold: 0.12 },
+      );
+      revealEls.forEach((el) => io.observe(el));
+
+      // nav hide on scroll down, show on scroll up
+      let lastY = window.scrollY;
+      const nav = document.getElementById("navbar");
+      window.addEventListener("scroll", () => {
+        const y = window.scrollY;
+        if (y > lastY && y > 200) {
+          nav.style.top = "-90px";
+        } else {
+          nav.style.top = "34px";
+        }
+        lastY = y;
+      });
+    </script>
+  </body>
+</html>
